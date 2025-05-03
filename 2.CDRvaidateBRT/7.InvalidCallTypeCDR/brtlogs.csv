@@ -1,0 +1,34 @@
+brt  | 03, 79902224477, 79903335588, 2025-04-30T00:00:00, 2025-04-30T00:37:00
+brt  | 01, 79903335588, 79902224477, 2025-04-30T00:00:00, 2025-04-30T00:37:00
+brt  | 03, 79908889911, 79993335577, 2025-04-30T00:56:00, 2025-04-30T00:59:00
+brt  | 01, 79993335577, 79908889911, 2025-04-30T00:56:00, 2025-04-30T00:59:00
+brt  | 03, 79993334466, 79901113366, 2025-04-30T01:23:00, 2025-04-30T02:02:00
+brt  | 01, 79901113366, 79993334466, 2025-04-30T01:23:00, 2025-04-30T02:02:00
+brt  | 03, 79907779922, 79901113366, 2025-04-30T02:11:00, 2025-04-30T02:45:00
+brt  | 01, 79901113366, 79907779922, 2025-04-30T02:11:00, 2025-04-30T02:45:00
+brt  | 02, 79908880033, 79997779911, 2025-04-30T02:47:00, 2025-04-30T02:56:00
+brt  | 01, 79997779911, 79908880033, 2025-04-30T02:47:00, 2025-04-30T02:56:00
+brt  | 
+brt  | 2025-04-30T23:25:29.606Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "03, 79902224477, 79903335588, 2025-04-30T00:00:00, 2025-04-30T00:37:00"
+brt  | 2025-04-30T23:25:29.610Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=03, callerMsisdn=79902224477, receiverMsisdn=79903335588, startTime=2025-04-30T00:00, endTime=2025-04-30T00:37)"
+brt  | 2025-04-30T23:25:29.610Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79903335588, 79902224477, 2025-04-30T00:00:00, 2025-04-30T00:37:00"
+brt  | 2025-04-30T23:25:29.613Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=01, callerMsisdn=79903335588, receiverMsisdn=79902224477, startTime=2025-04-30T00:00, endTime=2025-04-30T00:37)"
+brt  | 2025-04-30T23:25:29.613Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "03, 79908889911, 79993335577, 2025-04-30T00:56:00, 2025-04-30T00:59:00"
+brt  | 2025-04-30T23:25:29.617Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=03, callerMsisdn=79908889911, receiverMsisdn=79993335577, startTime=2025-04-30T00:56, endTime=2025-04-30T00:59)"
+brt  | 2025-04-30T23:25:29.617Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79993335577, 79908889911, 2025-04-30T00:56:00, 2025-04-30T00:59:00"
+brt  | 2025-04-30T23:25:29.622Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver is not serviced by Romashka
+brt  | 2025-04-30T23:25:29.685Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Cannot invoke "java.lang.Double.doubleValue()" because the return value of "rom.brt.dto.CalculationResponse.cost()" is null
+brt  | 2025-04-30T23:25:29.685Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "03, 79993334466, 79901113366, 2025-04-30T01:23:00, 2025-04-30T02:02:00"
+brt  | 2025-04-30T23:25:29.689Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver is not serviced by Romashka
+brt  | 2025-04-30T23:25:29.689Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Fragment "03, 79993334466, 79901113366, 2025-04-30T01:23:00, 2025-04-30T02:02:00" parsing resulted in exception "Invalid callType. Must be '01' or '02'"
+brt  | 2025-04-30T23:25:29.689Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79901113366, 79993334466, 2025-04-30T01:23:00, 2025-04-30T02:02:00"
+brt  | 2025-04-30T23:25:29.692Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=01, callerMsisdn=79901113366, receiverMsisdn=79993334466, startTime=2025-04-30T01:23, endTime=2025-04-30T02:02)"
+brt  | 2025-04-30T23:25:29.692Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "03, 79907779922, 79901113366, 2025-04-30T02:11:00, 2025-04-30T02:45:00"
+brt  | 2025-04-30T23:25:29.695Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=03, callerMsisdn=79907779922, receiverMsisdn=79901113366, startTime=2025-04-30T02:11, endTime=2025-04-30T02:45)"
+brt  | 2025-04-30T23:25:29.695Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79901113366, 79907779922, 2025-04-30T02:11:00, 2025-04-30T02:45:00"
+brt  | 2025-04-30T23:25:29.699Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=01, callerMsisdn=79901113366, receiverMsisdn=79907779922, startTime=2025-04-30T02:11, endTime=2025-04-30T02:45)"
+brt  | 2025-04-30T23:25:29.699Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79908880033, 79997779911, 2025-04-30T02:47:00, 2025-04-30T02:56:00"
+brt  | 2025-04-30T23:25:29.703Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=02, callerMsisdn=79908880033, receiverMsisdn=79997779911, startTime=2025-04-30T02:47, endTime=2025-04-30T02:56)"
+brt  | 2025-04-30T23:25:29.704Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79997779911, 79908880033, 2025-04-30T02:47:00, 2025-04-30T02:56:00"
+brt  | 2025-04-30T23:25:29.707Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver is not serviced by Romashka
+brt  | 2025-04-30T23:25:29.713Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Cannot invoke "java.lang.Double.doubleValue()" because the return value of "rom.brt.dto.CalculationResponse.cost()" is null

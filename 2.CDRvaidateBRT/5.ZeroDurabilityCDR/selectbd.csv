@@ -1,0 +1,3 @@
+call_id,call_type,caller_msisdn,receiver_msisdn,start_time,end_time,duration_minutes,cost,created_at
+66,02,79992224466,79909990022,2025-04-30 01:36:00,2025-04-30 02:08:00,32,16.0,
+67,01,79995556688,79908880033,2025-04-30 02:18:00,2025-04-30 02:57:00,39,58.5,

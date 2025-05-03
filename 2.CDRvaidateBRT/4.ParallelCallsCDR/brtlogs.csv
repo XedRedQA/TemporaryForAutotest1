@@ -1,0 +1,42 @@
+brt  | 2025-04-30T23:32:20.176Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79906667799, 79992224466, 2025-04-30T00:00:00, 2025-04-30T00:01:00"
+brt  | 2025-04-30T23:32:20.182Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=02, callerMsisdn=79906667799, receiverMsisdn=79992224466, startTime=2025-04-30T00:00, endTime=2025-04-30T00:01)"
+brt  | 2025-04-30T23:32:20.183Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79992224466, 79906667799, 2025-04-30T00:00:00, 2025-04-30T00:01:00"
+brt  | 2025-04-30T23:32:20.196Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver is not serviced by Romashka
+brt  | 2025-04-30T23:32:20.216Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=2, userName=Дудкин Петр Петрович, tariffId=12, msisdn=79992224466, balance=108.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@61f2825a)
+brt  | 
+brt  | 2025-04-30T23:32:20.222Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79992224466, receiverMsisdn=79906667799, startTime=2025-04-30T00:00, endTime=2025-04-30T00:01)
+brt  | Response: CalculationResponse[cost=1.5, tariffType=PER_MINUTE, description=Поминутная тарификация, remainingMinutes=null, nextPaymentDate=null]
+brt  | 2025-04-30T23:32:20.222Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79991112244, 79908880033, 2025-04-30T00:27:00, 2025-04-30T00:44:00"
+brt  | 2025-04-30T23:32:20.230Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver is not serviced by Romashka
+brt  | 2025-04-30T23:32:20.249Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=10, userName=Андреева София Владимировна, tariffId=12, msisdn=79991112244, balance=67.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@4ea5002c)
+brt  | 
+brt  | 2025-04-30T23:32:20.260Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=02, callerMsisdn=79991112244, receiverMsisdn=79908880033, startTime=2025-04-30T00:27, endTime=2025-04-30T00:44)
+brt  | Response: CalculationResponse[cost=8.5, tariffType=PER_MINUTE, description=Поминутная тарификация, remainingMinutes=null, nextPaymentDate=null]
+brt  | 2025-04-30T23:32:20.260Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79908880033, 79991112244, 2025-04-30T00:27:00, 2025-04-30T00:44:00"
+brt  | 2025-04-30T23:32:20.274Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=01, callerMsisdn=79908880033, receiverMsisdn=79991112244, startTime=2025-04-30T00:27, endTime=2025-04-30T00:44)"
+brt  | 2025-04-30T23:32:20.274Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79998880022, 79994446688, 2025-04-30T01:24:00, 2025-04-30T01:46:00"
+brt  | 2025-04-30T23:32:20.293Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=8, userName=Иванова Екатерина Борисовна, tariffId=12, msisdn=79998880022, balance=-92.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@586d415b)
+brt  | 
+brt  | 2025-04-30T23:32:20.297Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79998880022, receiverMsisdn=79994446688, startTime=2025-04-30T01:24, endTime=2025-04-30T01:46)
+brt  | Response: CalculationResponse[cost=33.0, tariffType=PER_MINUTE, description=Поминутная тарификация, remainingMinutes=null, nextPaymentDate=null]
+brt  | 2025-04-30T23:32:20.297Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79994446688, 79998880022, 2025-04-30T01:24:00, 2025-04-30T01:46:00"
+brt  | 2025-04-30T23:32:20.321Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=4, userName=Сидоров Владимир Владимирович, tariffId=12, msisdn=79994446688, balance=217.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@27792d21)
+brt  | 
+brt  | 2025-04-30T23:32:20.324Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=02, callerMsisdn=79994446688, receiverMsisdn=79998880022, startTime=2025-04-30T01:24, endTime=2025-04-30T01:46)
+brt  | Response: CalculationResponse[cost=11.0, tariffType=PER_MINUTE, description=Поминутная тарификация, remainingMinutes=null, nextPaymentDate=null]
+brt  | 2025-04-30T23:32:20.325Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79998880022, 79904446699, 2025-04-30T01:24:00, 2025-04-30T01:48:00"
+brt  | 2025-04-30T23:32:20.328Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver is not serviced by Romashka
+brt  | 2025-04-30T23:32:20.338Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=8, userName=Иванова Екатерина Борисовна, tariffId=12, msisdn=79998880022, balance=-128.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@202618c3)
+brt  | 
+brt  | 2025-04-30T23:32:20.342Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79998880022, receiverMsisdn=79904446699, startTime=2025-04-30T01:24, endTime=2025-04-30T01:48)
+brt  | Response: CalculationResponse[cost=36.0, tariffType=PER_MINUTE, description=Поминутная тарификация, remainingMinutes=null, nextPaymentDate=null]
+brt  | 2025-04-30T23:32:20.342Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79904446699, 79998880022, 2025-04-30T01:24:00, 2025-04-30T01:48:00"
+brt  | 2025-04-30T23:32:20.346Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=02, callerMsisdn=79904446699, receiverMsisdn=79998880022, startTime=2025-04-30T01:24, endTime=2025-04-30T01:48)"
+brt  | 2025-04-30T23:32:20.346Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79900001144, 79992223355, 2025-04-30T01:24:00, 2025-04-30T02:14:00"
+brt  | 2025-04-30T23:32:20.352Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing for fragment: "Fragment(callType=02, callerMsisdn=79900001144, receiverMsisdn=79992223355, startTime=2025-04-30T01:24, endTime=2025-04-30T02:14)"
+brt  | 2025-04-30T23:32:20.353Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79992223355, 79900001144, 2025-04-30T01:24:00, 2025-04-30T02:14:00"
+brt  | 2025-04-30T23:32:20.356Z ERROR 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver is not serviced by Romashka
+brt  | 2025-04-30T23:32:20.368Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=11, userName=Сергеев Сергей Сергеевич, tariffId=11, msisdn=79992223355, balance=483.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@30583330)
+brt  | 
+brt  | 2025-04-30T23:32:20.371Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79992223355, receiverMsisdn=79900001144, startTime=2025-04-30T01:24, endTime=2025-04-30T02:14)
+brt  | Response: CalculationResponse[cost=75.0, tariffType=PER_MINUTE, description=Лимит пакета исчерпан, применена поминутная тарификация, remainingMinutes=null, nextPaymentDate=null]

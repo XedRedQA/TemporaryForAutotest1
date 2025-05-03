@@ -1,0 +1,1 @@
+call_id,call_type,caller_msisdn,receiver_msisdn,start_time,end_time,duration_minutes,cost,created_at

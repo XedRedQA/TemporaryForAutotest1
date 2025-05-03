@@ -1,0 +1,668 @@
+openapi: '3.0.0'
+info: 
+  title: Ромашка API
+  description: API предоставляет доступ к управлению балансом и тарифами абонентов оператора "Ромашка"
+  version: '1.2.0'
+servers:
+  - url: http://romashka.ru/api/v1.2
+tags:
+  - name: users
+    description: Операции, связанные с абонентами и их балансом
+  - name: tariffs
+    description: Операции, связанные с тарифами
+paths:
+  /users:
+    summary: Операции по абонентам
+    description: Содержит список методов для управления абонентами
+    get:
+      security:
+        - BasicAuthentication: []
+      tags:
+        - users
+      summary: Получить всех абонентов
+      description: Получить данные по всем абонентам
+      operationId: getUsers
+      parameters:
+        - name: sortBy
+          in: query
+          description: Сортировать абонентов по атрибуту
+          schema:
+            type: string
+            default: name
+            example: ../api/v1.2/users?sortBy=name
+          required: false
+      responses:
+        '200':
+          description: Успешно возвращен список всех абонентов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          description: Данные не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              example:
+                error: Не найдены абоненты для возврата
+                errorCode: 404
+        '500':
+          $ref: '#/components/responses/500Response'
+    post:
+      security:
+        - BasicAuthentication: []
+      tags:
+        - users
+      summary: Создание абонента
+      description: Создать нового абонента
+      operationId: addUser
+      requestBody:
+        description: Данные для добавления абонента
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserNew'
+      responses:
+        '200':
+          description: Был успешно создан новый абонент
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseTariff'
+        '500':
+          $ref: "#/components/responses/500Response"
+
+  /users/{userId}:
+    summary: Операции по конкретному абоненту
+    description: Работа с данными конкретного абонента
+    get:
+      security:
+        - BasicAuthentication: []
+      tags:
+        - users
+      summary: Получить одного абонента
+      description: Получить данные по конкретному абоненту
+      operationId: getUser
+      parameters:
+        - name: userId
+          in: path
+          description: Уникальный идентификатор абонента
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Успешно возвращены данные по абоненту
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseUser'
+        '500':
+          $ref: "#/components/responses/500Response"
+    patch:
+      security:
+        - BasicAuthentication: []
+      tags:
+        - users
+      summary: Редактировать абонента
+      description: Изменение данных абонента
+      operationId: editUser
+      parameters:
+        - name: userId
+          in: path
+          description: Уникальный идентификатор абонента
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Данные для обновления абонента
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEdit'
+
+      responses:
+        '200':
+          description: Данные успешно изменены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseUser'
+        '500':
+          $ref: "#/components/responses/500Response"
+
+  /users/{userId}/tariff:
+    summary: Работа с тарифом конкретного абонента
+    description: Получение и изменение данных по тарифу конкретного абонента
+    get:
+      security:
+        - BasicAuthentication: []
+      tags:
+        - users
+        - tariffs
+      summary: Получить тариф абонента
+      description: Получить всю информацию о тарифе данного абонента
+      operationId: getUserTariff
+      parameters:
+        - name: userId
+          in: path
+          description: Уникальный идентификатор абонента
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Успешно возвращены данные по тарифу конкретного абонента
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tariff'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseUser'
+        '500':
+          $ref: "#/components/responses/500Response"
+    patch:
+      security:
+        - BasicAuthentication: []
+      tags:
+        - users
+        - tariffs
+      summary: Смена тарифа абонента
+      description: Смена тарифа, к которому подключен абонент
+      operationId: changeTariff
+      parameters:
+        - name: userId
+          in: path
+          description: Уникальный идентификатор абонента
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Данные для обновления у абонента
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Id тарифа, к которому необходимо подключить абонента
+              properties:
+                tariffId:
+                  type: number
+                  description: Уникальный id тарифа
+              example:
+                tariffId: 12
+      responses:
+        '200':
+          description: Тариф абонента успешно изменен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Абонент уже подключен к этому тарифу
+                errorCode: 400
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseTariff'
+        '500':
+          $ref: "#/components/responses/500Response"
+  /users/{userId}/balance:
+    summary: Управление балансом
+    description: Работа с балансом конкретного абонента
+    get:
+      security:
+        - BasicAuthentication: []
+      
+      tags:
+        - users
+      summary: Узнать баланс абонента
+      description: Возвращается значение средств на счету абонента
+      operationId: getUserBalance
+      parameters:
+        - name: userId
+          in: path
+          description: Уникальный идентификатор абонента
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Успешно возвращено числовое значение баланса абонента
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  money:
+                    type: number
+                    description: Средства на счету абонента
+              example:
+                money: 115.55
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseUser'
+        '500':
+          $ref: "#/components/responses/500Response"
+    patch:
+      security:
+        - BasicAuthentication: []
+      
+      tags:
+        - users
+      summary: Изменение баланса абонента
+      description: Изменение баланса абонента на конкретное значение
+      operationId: updateUserBalance
+      parameters:
+        - name: userId
+          in: path
+          description: Уникальный идентификатор абонента
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Параметр и значение, на которое будет обновлен баланс
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Значение, на которое необходимо изменить баланс абонента
+              properties:
+                money:
+                  type: number
+                  format: float
+                  description: Новое значение баланса
+              example:
+                money: 115.55
+      responses:
+        '200':
+          description: Баланс абонента успешно изменен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseUser'
+        '500':
+          $ref: "#/components/responses/500Response"
+  /users/pay:
+    summary: Пополнение баланса
+    description: Endpoint для пополнения баланса абонента
+    post:
+      security:
+        - BearerAuthentication: []
+      tags:
+        - users
+      summary: Пополнение баланса
+      description: Пополнение баланса абонента на указанную сумму
+      operationId: pay
+      requestBody:
+        description: Информация для пополнения баланса
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Информация для пополнения баланса
+              properties:
+                msisdn:
+                  type: string
+                  pattern: ^7\d{10}$
+                  description: Номер телефона абонента
+                amount:
+                  type: number
+                  description: Сумма для пополнения 
+              example:
+                msisdn: "79991113355"
+                amount: 100
+                  
+      responses:
+        '200':
+          description: Баланс абонента успешно пополнен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Некорректный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Нулевая или отрицательная сумма пополнения
+                errorCode: 400
+        '401':
+          $ref: '#/components/responses/401ResponseUser'
+        '404':
+          $ref: '#/components/responses/404ResponseUser'
+        '500':
+          $ref: "#/components/responses/500Response"
+
+  /tariffs:
+    summary: Операции по тарифам
+    description: Работа с данными по всем тарифам в системе
+    get:
+      security:
+        - BasicAuthentication: []     
+      tags:
+        - tariffs
+      summary: Получить все тарифы
+      description: Возвращает информацию по всем тарифам и информацию о них
+      operationId: getTariffs
+      parameters:
+        - name: sortBy
+          in: query
+          description: Сортировать тарифы по атрибуту
+          schema:
+            type: string
+            default: name
+            example: ../api/v1.2/tariffs?sortBy=name
+          required: false
+      responses:
+        '200':
+          description: Успешно возвращен список всех тарифов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tariff'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401ResponseAdmin'
+        '404':
+          $ref: '#/components/responses/404ResponseTariff'
+        '500':
+          $ref: "#/components/responses/500Response"
+
+components:
+  responses:
+    400Response:
+      description: Некорректный запрос
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Некорректный запрос
+            errorCode: 400
+    401ResponseUser:
+      description: Ошибка авторизации
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Абонент не авторизован
+            errorCode: 401
+    401ResponseAdmin:
+      description: Ошибка авторизации
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Менеджер не авторизован
+            errorCode: 401
+    404ResponseUser:
+      description: Данные не найдены
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Абонент не найден
+            errorCode: 404
+    404ResponseTariff:
+      description: Данные не найдены
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Тариф не найден
+            errorCode: 404
+    500Response:
+      description: Ошибка сервера
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Внутренняя ошибка сервера
+            errorCode: 500
+
+  schemas:
+    UserEdit:
+      type: object
+      description: Информация для обновления данных абонента
+      properties:
+        name:
+          type: string
+          description: ФИО абонента
+        msisdn:
+          type: string
+          description: Номер телефона абонента
+
+      example:
+        name: Иванов Иван Иванович
+        msisdn: "79991113355"
+    UserNew:
+      type: object
+      description: Информация для добавления нового абонента
+      properties:
+        name:
+          type: string
+          description: ФИО абонента
+        tariffId:
+          type: integer
+          description: Уникальный идентификатор тарифа
+        msisdn:
+          type: string
+          description: Номер телефона абонента
+        money:
+          type: number
+          format: float
+          description: Баланс на счету абонента
+
+      example:
+        name: Иванов Иван Иванович
+        tariffId: 12
+        msisdn: "79991113355"
+        money: 115.55
+      required:
+        - name
+        - tariffId
+        - msisdn
+        - money
+    User:
+      type: object
+      description: Информация по абоненту
+      properties:
+        id:
+          type: number
+          description: Уникальный идентификатор абонента
+        name:
+          type: string
+          description: ФИО абонента
+        tariffId:
+          type: integer
+          description: Уникальный идентификатор тарифа
+        msisdn:
+          type: string
+          description: Номер телефона абонента
+        money:
+          type: number
+          format: float
+          description: Баланс на счету абонента
+        regDate:
+          type: string
+          format: dateTime
+          description: Дата и время регистрации абонента
+        minutes:
+          type: integer
+          description: Число тарифных минут у абонента
+        nextPay:
+          type: string
+          format: dateTime
+          description: Дата ближайшего платежа
+      required:
+        - name
+        - tariffId
+        - msisdn
+        - money
+        - regDate
+      example:
+        id: 1
+        name: Иванов Иван Иванович
+        tariffId: 12
+        msisdn: "79991113355"
+        money: 115.55
+        regDate: "2024-04-14T19:59:20"
+        minutes: 50
+        nextPay: "2024-05-14T19:59:20"
+    Tariff:
+      type: object
+      description: Информация по тарифу
+      properties:
+        id:
+          type: number
+          description: Уникальный идентификатор тарифа
+        name:
+          type: string
+          description: Название тарифа
+        description:
+          type: string
+          description: Описание тарифа
+        callPrices:
+          type: array
+          description: Поминутная стоимость звонков
+          items:
+            type: object
+            properties:
+              callType:
+                type: number
+                description: Идентификатор типа звонка
+              callPrice:
+                type: number
+                format: float
+                description: Стоимость одной минуты звонка
+        interval:
+          type: integer
+          description: Интервал (в днях), на который предоставляются услуги тарифа
+        price:
+          type: number
+          format: float
+          description: Цена продления тарифа
+        params:
+          type: array
+          description: Дополнительные услуги, входящие в тариф
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: Уникальный идентификатор доп. услуги
+              name:
+                type: string
+                description: Название услуги
+              description:
+                type: string
+                description: Описание услуги
+              value:
+                type: number
+                format: float
+                description: Количественное значение услуги
+              units:
+                type: string
+                description: Единицы измерения услуги
+      required:
+        - name
+        - description
+        - callPrices
+      example:
+        id: 12
+        name: Помесячный
+        description: Помесячный тариф для совершения звонков
+        callPrices:
+          - callType: 1
+            callPrice: 1.5
+          - callType: 2
+            callPrice: 2.5
+        interval: 30
+        price: 100
+        params:
+          - id: 1
+            name: Минуты
+            description: Общие минуты для любых звонков
+            value: 50
+            units: mins
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Текст ошибки
+        errorCode:
+          type: integer
+          description: Код ошибки
+      required:
+        - error
+        - errorCode   
+  
+  securitySchemes:
+    BasicAuthentication:
+      type: http
+      scheme: basic
+    BearerAuthentication:
+      type: http
+      scheme: bearer
+
+
