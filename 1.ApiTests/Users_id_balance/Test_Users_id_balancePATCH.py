@@ -55,6 +55,42 @@ def test_patch_user_id_balance200(select_user_id_bd,select_user_balance_bd,db_en
     new_balance_for_check = check_changes_in_bd(db_engine, select_user_id_bd)
     assert select_user_balance_bd != new_balance_for_check['balance'], "Баланс не изменен, ожидалось, что имя изменится"
 
+def test_patch_user_id_zero_balance200(select_user_id_bd,select_user_balance_bd,db_engine):
+
+    payload_new_balance = {
+        "balance": 0
+    }
+
+    url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/balance"
+    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_balance)
+
+    assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
+    assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
+    
+    user_balance = response.json()
+    assert "balance" in user_balance, "Баланс не отобразился"
+    
+    new_balance_for_check = check_changes_in_bd(db_engine, select_user_id_bd)
+    assert select_user_balance_bd != new_balance_for_check['balance'], "Баланс не изменен, ожидалось, что имя изменится"
+
+def test_patch_user_id_negative_balance200(select_user_id_bd,select_user_balance_bd,db_engine):
+
+    payload_new_balance = {
+        "balance": random.randint(-300, -10)
+    }
+
+    url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/balance"
+    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_balance)
+
+    assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
+    assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
+    
+    user_balance = response.json()
+    assert "balance" in user_balance, "Баланс не отобразился"
+    
+    new_balance_for_check = check_changes_in_bd(db_engine, select_user_id_bd)
+    assert select_user_balance_bd != new_balance_for_check['balance'], "Баланс не изменен, ожидалось, что имя изменится"
+
 def test_patch_user_id_balance400(select_user_id_bd, select_user_balance_bd, db_engine):
 
     payload_new_balance = {
