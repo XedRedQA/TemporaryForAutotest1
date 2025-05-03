@@ -1,4 +1,4 @@
-balance,balance
-self,other
-121.0,96.0
-193.0,118.0
+balance,balance,minutes,minutes
+self,other,self,other
+121.0,-254.0,50,17
+193.0,-563.0,50,10

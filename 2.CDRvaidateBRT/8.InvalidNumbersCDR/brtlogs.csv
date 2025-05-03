@@ -1,15 +1,15 @@
-brt  | 01, 714501593446, 785068031842, 2025-04-30T00:00:00, 2025-04-30T00:18:00
-brt  | 02, 785068031842, 714501593446, 2025-04-30T00:00:00, 2025-04-30T00:18:00
-brt  | 02, 706951433849, 754253880943, 2025-04-30T00:41:00, 2025-04-30T00:42:00
-brt  | 01, 754253880943, 706951433849, 2025-04-30T00:41:00, 2025-04-30T00:42:00
-brt  | 01, 762754776848, 710586834607, 2025-04-30T01:14:00, 2025-04-30T01:32:00
-brt  | 02, 710586834607, 762754776848, 2025-04-30T01:14:00, 2025-04-30T01:32:00
-brt  | 01, 724640019746, 740745495038, 2025-04-30T01:43:00, 2025-04-30T02:34:00
-brt  | 02, 740745495038, 724640019746, 2025-04-30T01:43:00, 2025-04-30T02:34:00
-brt  | 02, 774301084064, 707059088778, 2025-04-30T02:08:00, 2025-04-30T02:52:00
-brt  | 01, 707059088778, 774301084064, 2025-04-30T02:08:00, 2025-04-30T02:52:00
 brt  | 
-brt  | 2025-04-30T23:29:49.975Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.ReportConsumer           : Received message: 
+brt  | 2025-05-03T10:51:45.068Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79998880022, receiverMsisdn=79996668800, startTime=2025-04-29T23:30, endTime=2025-04-29T23:44)
+brt  | Response: CalculationResponse[cost=121.0, tariffType=00, description=Default description, remainingMinutes=10, nextPaymentDate=2024-10-10]
+brt  | 2025-05-03T10:51:45.068Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79900001144, 79906668811, 2025-04-30T00:14:00, 2025-04-30T00:54:00"
+brt  | 2025-05-03T10:51:45.069Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got callerRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79900001144, balance=null, registrationDate=null, userParams=null)
+brt  | 2025-05-03T10:51:45.070Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got receiverRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79906668811, balance=null, registrationDate=null, userParams=null)
+brt  | 2025-05-03T10:51:45.070Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing
+brt  | 2025-05-03T10:51:45.070Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79906668811, 79900001144, 2025-04-30T00:14:00, 2025-04-30T00:54:00"
+brt  | 2025-05-03T10:51:45.071Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got callerRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79906668811, balance=null, registrationDate=null, userParams=null)
+brt  | 2025-05-03T10:51:45.073Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got receiverRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79900001144, balance=null, registrationDate=null, userParams=null)
+brt  | 2025-05-03T10:51:45.073Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing
+brt  | 2025-05-03T10:52:12.661Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.ReportConsumer           : Received message: 
 brt  | 01, 714501593446, 785068031842, 2025-04-30T00:00:00, 2025-04-30T00:18:00
 brt  | 02, 785068031842, 714501593446, 2025-04-30T00:00:00, 2025-04-30T00:18:00
 brt  | 02, 706951433849, 754253880943, 2025-04-30T00:41:00, 2025-04-30T00:42:00
