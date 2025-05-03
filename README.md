@@ -15,3 +15,12 @@ pytest .\{Name_of_file.py}
 ```bash
 .\{Name_of_file.py}
 ```
+## Работа с Allure report
+### Запуск автотеста с создание файлов отчета 
+```bash
+pytest --alluredir allure-results
+```
+### Просмотр отчета
+```bash
+allure serve allure-results
+```
