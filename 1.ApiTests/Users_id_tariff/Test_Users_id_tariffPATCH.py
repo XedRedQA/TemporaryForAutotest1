@@ -4,12 +4,19 @@ from sqlalchemy import create_engine
 import pandas as pd
 import random
 import string
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+uid = os.getenv('DB_USER')
+pwd = os.getenv('DB_PASSWORD')
+API_USER = os.getenv('API_USER')
+API_PASS = os.getenv('API_PASS')
+
 
 
 @pytest.fixture
 def db_engine():
-    uid = 'admin'
-    pwd = 'admin'
     server = 'localhost'
     database = 'romashka'
     return create_engine(f'postgresql://{uid}:{pwd}@{server}:54320/{database}')
@@ -49,7 +56,7 @@ def test_patch_user_id_tariff200(select_user_id_bd,select_user_tariff_bd,db_engi
         }
 
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/tariff"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_tariff)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_new_tariff)
 
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -72,7 +79,7 @@ def test_patch_user_id_tariff400(select_user_id_bd, select_user_tariff_bd, db_en
         }
 
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/tariff"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_tariff)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_new_tariff)
 
     assert response.status_code == 400, f"Ожидался 400, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -101,6 +108,6 @@ def test_patch_user_id_tariff404(select_user_id_bd):
             "tariff_id": bad_tariff_id
         }
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/tariff"
-    response = requests.patch(url, auth=('admin', 'admin'), json=data)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=data)
     
     assert response.status_code == 404, f"Ожидался 404, получен {response.status_code}" 

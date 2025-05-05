@@ -1,15 +1,22 @@
 import pytest
 import requests
-import random
-from names_generator import generate_name
-import string
 from sqlalchemy import create_engine
 import pandas as pd
+import random
+import string
+from names_generator import generate_name
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+uid = os.getenv('DB_USER')
+pwd = os.getenv('DB_PASSWORD')
+API_USER = os.getenv('API_USER')
+API_PASS = os.getenv('API_PASS')
+
 
 @pytest.fixture(scope="module")
 def db_engine():
-    uid = 'admin'
-    pwd = 'admin'
     server = 'localhost'
     database = 'romashka'
     return create_engine(f'postgresql://{uid}:{pwd}@{server}:54320/{database}')
@@ -31,7 +38,7 @@ def test_post_create_user200(db_engine):
     user_data = generator()
     url = "http://romashka.ru/api/v1.2/users"
 
-    response = requests.post(url, auth=('admin', 'admin'), json=user_data)
+    response = requests.post(url, auth=(API_USER, API_PASS), json=user_data)
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
     
@@ -52,7 +59,7 @@ def test_post_create_user400(db_engine):
     }
 
     url = "http://romashka.ru/api/v1.2/users"
-    response = requests.post(url, auth=('admin', 'admin'), json=bad_data)
+    response = requests.post(url, auth=(API_USER, API_PASS), json=bad_data)
     
     assert response.status_code == 400, f"Ожидался 400, получен {response.status_code}" 
     user_from_db = check_new_user_in_bd(db_engine, bad_data["number"])
@@ -80,7 +87,7 @@ def test_post_create_user404(db_engine):
     }
 
     url = "http://romashka.ru/api/v1.2/users"
-    response = requests.post(url, auth=('admin', 'admin'), json=bad_data)
+    response = requests.post(url, auth=(API_USER, API_PASS), json=bad_data)
     assert response.status_code == 404, f"Ожидался 404, получен {response.status_code}" 
     
     user_from_db = check_new_user_in_bd(db_engine, bad_data["msisdn"])

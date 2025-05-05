@@ -4,12 +4,17 @@ from sqlalchemy import create_engine
 import pandas as pd
 import random
 import string
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
+uid = os.getenv('DB_USER')
+pwd = os.getenv('DB_PASSWORD')
+API_USER = os.getenv('API_USER')
+API_PASS = os.getenv('API_PASS')
 
 @pytest.fixture
 def db_engine():
-    uid = 'admin'
-    pwd = 'admin'
     server = 'localhost'
     database = 'romashka'
     return create_engine(f'postgresql://{uid}:{pwd}@{server}:54320/{database}')
@@ -44,7 +49,7 @@ def test_patch_user_id_balance200(select_user_id_bd,select_user_balance_bd,db_en
     }
 
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/balance"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_balance)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_new_balance)
 
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -62,7 +67,7 @@ def test_patch_user_id_zero_balance200(select_user_id_bd,select_user_balance_bd,
     }
 
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/balance"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_balance)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_new_balance)
 
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -80,7 +85,7 @@ def test_patch_user_id_negative_balance200(select_user_id_bd,select_user_balance
     }
 
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/balance"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_balance)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_new_balance)
 
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -97,7 +102,7 @@ def test_patch_user_id_balance400(select_user_id_bd, select_user_balance_bd, db_
         "balance": 'abc'
     }
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}/balance"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_new_balance)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_new_balance)
 
     assert response.status_code == 400, f"Ожидался 400, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -123,6 +128,6 @@ def test_patch_user_id_balance401(select_user_id_bd):
 def test_patch_user_id_balance404():
     bad_id = random.randint(1000000, 9999999)
     url = f"http://romashka.ru/api/v1.2/users/{bad_id}/balance"
-    response = requests.patch(url, auth=('admin', 'admin'))
+    response = requests.patch(url, auth=(API_USER, API_PASS))
     
     assert response.status_code == 404, f"Ожидался 404, получен {response.status_code}" 

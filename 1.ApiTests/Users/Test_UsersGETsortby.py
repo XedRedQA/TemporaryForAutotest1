@@ -1,7 +1,13 @@
 import pytest
 import requests
-import string
 import random
+import string
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+API_USER = os.getenv('API_USER')
+API_PASS = os.getenv('API_PASS')
 
 @pytest.mark.parametrize('SortParams', ["user_id", "user_name", "tariff_id", "msisdn", "balance", "registration_date", "payment_day", "minutes", ])
 
@@ -10,7 +16,7 @@ def test_get_sorted_userlist200(SortParams):
     Params = ["user_id", "user_name", "tariff_id", "msisdn", "balance", "registration_date", "payment_day", "minutes", ]
     
     url = f"http://romashka.ru/api/v1.2/users?sortBy={SortParams}"
-    response = requests.get(url, auth=('admin', 'admin'))
+    response = requests.get(url, auth=(API_USER, API_PASS))
     
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -28,7 +34,7 @@ def test_get_sorted_userlist200(SortParams):
 
 def test_get_sorted_userlist400():
     url = "http://romashka.ru/api/v1.2/users?sortBy=imena"
-    response = requests.get(url, auth=('admin', 'admin'))
+    response = requests.get(url, auth=(API_USER, API_PASS))
     
     assert response.status_code == 400, f"Ожидался 400, получен {response.status_code}" 
 
@@ -45,6 +51,6 @@ def test_get_sorted_userlist401(SortParams):
 
 def test_get_sorted_userlist404():
     url = "http://romashka.ru/api/v1.2/useri"
-    response = requests.get(url, auth=('admin', 'admin'))
+    response = requests.get(url, auth=(API_USER, API_PASS))
     
     assert response.status_code == 404, f"Ожидался 404, получен {response.status_code}" 

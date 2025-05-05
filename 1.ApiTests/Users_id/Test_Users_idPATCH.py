@@ -5,11 +5,19 @@ import pandas as pd
 import random
 import string
 from names_generator import generate_name
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+uid = os.getenv('DB_USER')
+pwd = os.getenv('DB_PASSWORD')
+API_USER = os.getenv('API_USER')
+API_PASS = os.getenv('API_PASS')
+
 
 @pytest.fixture
 def db_engine():
-    uid = 'admin'
-    pwd = 'admin'
+
     server = 'localhost'
     database = 'romashka'
     return create_engine(f'postgresql://{uid}:{pwd}@{server}:54320/{database}')
@@ -52,7 +60,7 @@ def test_patch_user_name_id200(select_user_id_bd,select_user_name_bd,db_engine):
     }
 
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_with_name)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_with_name)
     
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -73,7 +81,7 @@ def test_patch_user_msisdn_id200(select_user_id_bd,select_user_number_bd,db_engi
         "msisdn": telephone_number 
     }
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_with_number)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_with_number)
     
     assert response.status_code == 200, f"Ожидался 200, получен {response.status_code}" 
     assert response.headers["Content-Type"] == "application/json; charset=UTF-8"
@@ -93,7 +101,7 @@ def test_patch_user_id400(select_user_id_bd):
         "phone_num": telephone_number 
     }
     url = f"http://romashka.ru/api/v1.2/users/{select_user_id_bd}"
-    response = requests.patch(url, auth=('admin', 'admin'), json=payload_with_number)
+    response = requests.patch(url, auth=(API_USER, API_PASS), json=payload_with_number)
     
     assert response.status_code == 400, f"Ожидался 400, получен {response.status_code}" 
 
@@ -111,6 +119,6 @@ def test_patch_user_id401(select_user_id_bd):
 def test_patch_user_id404():
     bad_id = random.randint(1000000, 9999999)
     url = f"http://romashka.ru/api/v1.2/users/{bad_id}"
-    response = requests.patch(url, auth=('admin', 'admin'))
+    response = requests.patch(url, auth=(API_USER, API_PASS))
     
     assert response.status_code == 404, f"Ожидался 404, получен {response.status_code}" 

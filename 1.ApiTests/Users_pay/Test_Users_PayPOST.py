@@ -1,15 +1,20 @@
 import pytest
 import requests
-import random
-from names_generator import generate_name
-import string
 from sqlalchemy import create_engine
 import pandas as pd
+import random
+import string
+from names_generator import generate_name
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+uid = os.getenv('DB_USER')
+pwd = os.getenv('DB_PASSWORD')
+
 
 @pytest.fixture(scope="module")
 def db_engine():
-    uid = 'admin'
-    pwd = 'admin'
     server = 'localhost'
     database = 'romashka'
     return create_engine(f'postgresql://{uid}:{pwd}@{server}:54320/{database}')

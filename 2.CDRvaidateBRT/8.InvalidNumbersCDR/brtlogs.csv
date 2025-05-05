@@ -1,15 +1,15 @@
+brt  | 2025-05-05T20:24:31.454Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got callerRecord: User(userId=7, userName=Дудкина Евгения Евгеньевна, tariffId=11, msisdn=79997779911, balance=382.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@15a375c3)
+brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got receiverRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79908880033, balance=null, registrationDate=null, userParams=null)
+brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Created caller: Subscriber[id=7, msisdn=79997779911, isServiced=true, tariffId=11, minutes=4, paymentDay=2024-05-13]
+brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver 79908880033 is not serviced by Romashka
+brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Created receiver: Subscriber[id=null, msisdn=79908880033, isServiced=false, tariffId=null, minutes=null, paymentDay=null]
+brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Sent request: CalculationRequest[callType=01, caller=Subscriber[id=7, msisdn=79997779911, isServiced=true, tariffId=11, minutes=4, paymentDay=2024-05-13], receiver=Subscriber[id=null, msisdn=79908880033, isServiced=false, tariffId=null, minutes=null, paymentDay=null], durationMinutes=9, currentDate=2025-04-30]
+brt  | 2025-05-05T20:24:31.465Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Received response: CalculationResponse[cost=22.5, tariffType=00, description=Default description, remainingMinutes=4, nextPaymentDate=2024-05-13]
+brt  | 2025-05-05T20:24:31.468Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=7, userName=Дудкина Евгения Евгеньевна, tariffId=11, msisdn=79997779911, balance=359.50, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@15a375c3)
 brt  | 
-brt  | 2025-05-03T10:51:45.068Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79998880022, receiverMsisdn=79996668800, startTime=2025-04-29T23:30, endTime=2025-04-29T23:44)
-brt  | Response: CalculationResponse[cost=121.0, tariffType=00, description=Default description, remainingMinutes=10, nextPaymentDate=2024-10-10]
-brt  | 2025-05-03T10:51:45.068Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "02, 79900001144, 79906668811, 2025-04-30T00:14:00, 2025-04-30T00:54:00"
-brt  | 2025-05-03T10:51:45.069Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got callerRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79900001144, balance=null, registrationDate=null, userParams=null)
-brt  | 2025-05-03T10:51:45.070Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got receiverRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79906668811, balance=null, registrationDate=null, userParams=null)
-brt  | 2025-05-03T10:51:45.070Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing
-brt  | 2025-05-03T10:51:45.070Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Trying to handle message "01, 79906668811, 79900001144, 2025-04-30T00:14:00, 2025-04-30T00:54:00"
-brt  | 2025-05-03T10:51:45.071Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got callerRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79906668811, balance=null, registrationDate=null, userParams=null)
-brt  | 2025-05-03T10:51:45.073Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got receiverRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79900001144, balance=null, registrationDate=null, userParams=null)
-brt  | 2025-05-03T10:51:45.073Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Caller is not serviced by Romashka. Terminating fragment processing
-brt  | 2025-05-03T10:52:12.661Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.ReportConsumer           : Received message: 
+brt  | 2025-05-05T20:24:31.471Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79997779911, receiverMsisdn=79908880033, startTime=2025-04-30T02:47, endTime=2025-04-30T02:56)
+brt  | Response: CalculationResponse[cost=22.5, tariffType=00, description=Default description, remainingMinutes=4, nextPaymentDate=2024-05-13]
+brt  | 2025-05-05T20:27:31.136Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.ReportConsumer           : Received message: 
 brt  | 01, 714501593446, 785068031842, 2025-04-30T00:00:00, 2025-04-30T00:18:00
 brt  | 02, 785068031842, 714501593446, 2025-04-30T00:00:00, 2025-04-30T00:18:00
 brt  | 02, 706951433849, 754253880943, 2025-04-30T00:41:00, 2025-04-30T00:42:00
