@@ -9,8 +9,8 @@ counter_records = 0
 file_counter = 1
 call_start = date_start
 date_counter = 1
-IterationCount = 100
-
+IterationCount = 59
+h = "call_type, caller_msisdn, receiver_msisdn, start_time, end_time"
 fixed_numbers = [
     '79991113355','79992224466','79993335577','79994446688','79995557799',
     '79996668800','79997779911','79998880022','79990001133','79991112244',
@@ -22,11 +22,11 @@ fixed_numbers = [
 
 file = open('CDR'+ str(file_counter) + '.csv', 'w')
 
-
 for i in range(IterationCount):
+    if counter_records == 0:
+        file.write(h + "\n")
 
     call_ends = call_start + timedelta(minutes=random.randint(1, 59)) 
-    
     call_middle_midnight = date_start + timedelta(days=date_counter)
 
     current_type = '0' + ''.join([random.choice(call_type) for x in range(1)]) + separator 
@@ -38,9 +38,9 @@ for i in range(IterationCount):
     if call_start < call_middle_midnight and call_ends > call_middle_midnight and telephone1 != telephone2:
         call_middle_midnight -= timedelta(seconds=1)
         
-        
         file.write(current_type + telephone1 + telephone2 + call_start.strftime('%Y-%m-%dT%H:%M:%S') + separator + call_middle_midnight.strftime('%Y-%m-%dT%H:%M:%S') + '\n')
         counter_records += 1
+
         if '01' in current_type:
             current_type = '02' + separator
         else:
@@ -49,8 +49,9 @@ for i in range(IterationCount):
         counter_records += 1
 
         call_middle_midnight += timedelta(seconds=1)
-        call_definition= call_ends - call_middle_midnight 
+        call_definition = call_ends - call_middle_midnight 
         call_midnight_ends = call_middle_midnight + call_definition
+
         file.write(current_type + telephone1 + telephone2 + call_middle_midnight.strftime('%Y-%m-%dT%H:%M:%S') + separator + call_midnight_ends.strftime('%Y-%m-%dT%H:%M:%S') + '\n')
         call_start = call_middle_midnight
         counter_records += 1
@@ -63,8 +64,7 @@ for i in range(IterationCount):
         counter_records += 1
 
         date_counter += 1
-    if call_start > date_start + timedelta(days=1) and date_counter == 0:
-        date_counter += 1
+        continue
     elif telephone1 != telephone2:
         file.write(current_type + telephone1 + telephone2 + call_start.strftime('%Y-%m-%dT%H:%M:%S') + separator + call_ends.strftime('%Y-%m-%dT%H:%M:%S') + '\n')
         counter_records += 1
@@ -78,7 +78,7 @@ for i in range(IterationCount):
 
     call_start += timedelta(minutes=random.randint(1, 59))
     if counter_records == 10:
-        
+
         counter_records = 0
         print('\n' + 'File ' + str(file_counter) + ' consist of 10 records')
         file_counter += 1

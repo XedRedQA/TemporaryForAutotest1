@@ -16,6 +16,7 @@ uid = os.getenv("DB_USER")
 pwd = os.getenv("DB_PASSWORD")
 rmq_user = os.getenv('RMQ_USER')
 rmq_password = os.getenv('RMQ_PASSWORD')
+h = "call_type, caller_msisdn, receiver_msisdn, start_time, end_time"
 
 @allure.title("Выбор абонентов с положительным балансом")
 def test_SelectAbonentsForCall():
@@ -51,6 +52,7 @@ def test_CreateCall():
             tmp.write(caller + '\n' + receiver)
         
         with open('emulatedcall.csv', 'w') as emu:
+                emu.write(h + "\n")
                 emu.write(f"01, " + caller + sep + receiver + sep + call_start.isoformat() + sep + call_ends.isoformat() + "\n")
                 emu.write(f"02, " + receiver + sep + caller + sep + call_start.isoformat() + sep + call_ends.isoformat() + "\n")
 

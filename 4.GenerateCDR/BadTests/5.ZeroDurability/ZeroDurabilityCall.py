@@ -9,8 +9,8 @@ counter_records = 0
 file_counter = 1
 call_start = date_start
 date_counter = 1
-IterationCount = 100
-
+IterationCount = 59
+h = "call_type, caller_msisdn, receiver_msisdn, start_time, end_time"
 fixed_numbers = [
     '79991113355','79992224466','79993335577','79994446688','79995557799',
     '79996668800','79997779911','79998880022','79990001133','79991112244',
@@ -24,6 +24,8 @@ file = open('ZeroDurabilityCDR'+ str(file_counter) + '.csv', 'w')
 
 
 for i in range(IterationCount):
+    if counter_records == 0:
+        file.write(h + "\n")
 
     call_ends = call_start + timedelta(minutes=random.randint(1, 59)) 
     
@@ -61,6 +63,7 @@ for i in range(IterationCount):
         counter_records += 1
 
         date_counter += 1
+        continue
     elif telephone1 != telephone2:
         file.write(current_type + telephone1 + telephone2 + call_start.strftime('%Y-%m-%dT%H:%M:%S') + separator + call_ends.strftime('%Y-%m-%dT%H:%M:%S') + '\n')
         counter_records += 1

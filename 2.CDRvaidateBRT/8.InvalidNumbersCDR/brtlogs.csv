@@ -1,23 +1,13 @@
-brt  | 2025-05-05T20:24:31.454Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got callerRecord: User(userId=7, userName=Дудкина Евгения Евгеньевна, tariffId=11, msisdn=79997779911, balance=382.00, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@15a375c3)
-brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Got receiverRecord: User(userId=-1, userName=null, tariffId=null, msisdn=79908880033, balance=null, registrationDate=null, userParams=null)
-brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Created caller: Subscriber[id=7, msisdn=79997779911, isServiced=true, tariffId=11, minutes=4, paymentDay=2024-05-13]
-brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Receiver 79908880033 is not serviced by Romashka
-brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Created receiver: Subscriber[id=null, msisdn=79908880033, isServiced=false, tariffId=null, minutes=null, paymentDay=null]
-brt  | 2025-05-05T20:24:31.456Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Sent request: CalculationRequest[callType=01, caller=Subscriber[id=7, msisdn=79997779911, isServiced=true, tariffId=11, minutes=4, paymentDay=2024-05-13], receiver=Subscriber[id=null, msisdn=79908880033, isServiced=false, tariffId=null, minutes=null, paymentDay=null], durationMinutes=9, currentDate=2025-04-30]
-brt  | 2025-05-05T20:24:31.465Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Received response: CalculationResponse[cost=22.5, tariffType=00, description=Default description, remainingMinutes=4, nextPaymentDate=2024-05-13]
-brt  | 2025-05-05T20:24:31.468Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.BillingService           : User information updated: User(userId=7, userName=Дудкина Евгения Евгеньевна, tariffId=11, msisdn=79997779911, balance=359.50, registrationDate=2024-04-14T19:59:20, userParams=rom.brt.entity.UserParams@15a375c3)
-brt  | 
-brt  | 2025-05-05T20:24:31.471Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.MessageHandler           : Saved fragment: Fragment(callType=01, callerMsisdn=79997779911, receiverMsisdn=79908880033, startTime=2025-04-30T02:47, endTime=2025-04-30T02:56)
-brt  | Response: CalculationResponse[cost=22.5, tariffType=00, description=Default description, remainingMinutes=4, nextPaymentDate=2024-05-13]
-brt  | 2025-05-05T20:27:31.136Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.ReportConsumer           : Received message: 
-brt  | 01, 714501593446, 785068031842, 2025-04-30T00:00:00, 2025-04-30T00:18:00
-brt  | 02, 785068031842, 714501593446, 2025-04-30T00:00:00, 2025-04-30T00:18:00
-brt  | 02, 706951433849, 754253880943, 2025-04-30T00:41:00, 2025-04-30T00:42:00
-brt  | 01, 754253880943, 706951433849, 2025-04-30T00:41:00, 2025-04-30T00:42:00
-brt  | 01, 762754776848, 710586834607, 2025-04-30T01:14:00, 2025-04-30T01:32:00
-brt  | 02, 710586834607, 762754776848, 2025-04-30T01:14:00, 2025-04-30T01:32:00
-brt  | 01, 724640019746, 740745495038, 2025-04-30T01:43:00, 2025-04-30T02:34:00
-brt  | 02, 740745495038, 724640019746, 2025-04-30T01:43:00, 2025-04-30T02:34:00
-brt  | 02, 774301084064, 707059088778, 2025-04-30T02:08:00, 2025-04-30T02:52:00
-brt  | 01, 707059088778, 774301084064, 2025-04-30T02:08:00, 2025-04-30T02:52:00
+brt  | 2025-05-10T13:28:38.217Z  INFO 1 --- [ntContainer#0-1] rom.brt.service.ReportConsumer           : Received message: 
+brt  | call_type, caller_msisdn, receiver_msisdn, start_time, end_time
+brt  | 01, 791059093881, 775692485727, 2025-04-30T00:00:00, 2025-04-30T00:20:00
+brt  | 02, 775692485727, 791059093881, 2025-04-30T00:00:00, 2025-04-30T00:20:00
+brt  | 01, 717971287584, 704102413597, 2025-04-30T00:04:00, 2025-04-30T00:44:00
+brt  | 02, 704102413597, 717971287584, 2025-04-30T00:04:00, 2025-04-30T00:44:00
+brt  | 01, 726143371473, 702296744400, 2025-04-30T00:31:00, 2025-04-30T01:24:00
+brt  | 02, 702296744400, 726143371473, 2025-04-30T00:31:00, 2025-04-30T01:24:00
+brt  | 02, 791990710233, 747585323342, 2025-04-30T01:05:00, 2025-04-30T01:28:00
+brt  | 01, 747585323342, 791990710233, 2025-04-30T01:05:00, 2025-04-30T01:28:00
+brt  | 01, 734807274934, 779325648029, 2025-04-30T01:32:00, 2025-04-30T02:19:00
+brt  | 02, 779325648029, 734807274934, 2025-04-30T01:32:00, 2025-04-30T02:19:00
 brt  | 
