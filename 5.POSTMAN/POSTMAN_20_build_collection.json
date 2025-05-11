@@ -1,0 +1,550 @@
+{
+	"info": {
+		"_postman_id": "565d8371-1973-46a0-bd4d-2c7a5d883d2e",
+		"name": "New API tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44640114",
+		"_collection_link": "https://xedred-2231722.postman.co/workspace/Bootcamp-2025~3efe2333-1a2b-436a-b991-67f8a84dcab6/collection/44640114-565d8371-1973-46a0-bd4d-2c7a5d883d2e?action=share&source=collection_link&creator=44640114"
+	},
+	"item": [
+		{
+			"name": "Manager Endpoints",
+			"item": [
+				{
+					"name": "Create Abonent",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"tariffid\", _.random(11, 12));\r",
+									"\r",
+									"let randomDigits = Math.floor(Math.random() * 1_000_000_000).toString().padStart(9, '0');\r",
+									"let randomMobile = \"79\" + randomDigits;\r",
+									"pm.collectionVariables.set(\"phoneNumber\", randomMobile);\r",
+									"\r",
+									"pm.collectionVariables.set(\"randomMin\", _.random(10, 100));\r",
+									"\r",
+									"const day = _.random(1, 31);\r",
+									"const formattedDay = day.toString().padStart(2, '0');\r",
+									"const paymentDay = `2025-01-${formattedDay}`;\r",
+									"pm.collectionVariables.set(\"paymentDay\", paymentDay);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"msisdn\": \"{{phoneNumber}}\",\r\n  \"tariffId\": {{tariffid}},\r\n  \"balance\": {{$randomInt}},\r\n  \"minutes\": {{randomMin}},\r\n  \"paymentDay\": \"{{paymentDay}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/manager/subscriber/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"manager",
+								"subscriber",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"authToken\", pm.response.json().token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/sign-in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"authToken\", pm.response.json().token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomDigits = Math.floor(Math.random() * 1_000_000_000).toString().padStart(9, '0');\r",
+									"let randomMobile = \"79\" + randomDigits;\r",
+									"pm.collectionVariables.set(\"phoneNumber\", randomMobile);\r",
+									"\r",
+									"let randomUsername = \"user\" + Math.floor(Math.random() * 100000);\r",
+									"pm.collectionVariables.set(\"username\", randomUsername);\r",
+									"\r",
+									"let randomPassword = Math.random().toString(36).slice(-8);\r",
+									"pm.collectionVariables.set(\"password\", randomPassword);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"msisdn\": \"{{phoneNumber}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"role\": \"MANAGER\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/sign-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top up User Balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/manager/subscriber/{{msisdn}}/balance/top-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"manager",
+								"subscriber",
+								"{{msisdn}}",
+								"balance",
+								"top-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change User Tariff",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"randomtariff\", _.random(11, 12));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tariffId\": {{randomtariff}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/manager/subscriber/{{msisdn}}/tariff/change-tariff",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"manager",
+								"subscriber",
+								"{{msisdn}}",
+								"tariff",
+								"change-tariff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change User Tariff Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"randomtariff\", _.random(11, 12));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tariffId\": 11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/manager/subscriber/79994446688/tariff/change-tariff",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"manager",
+								"subscriber",
+								"79994446688",
+								"tariff",
+								"change-tariff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Info About Tariff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"tariff_for_information\", _.random(11, 12));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/manager/tariffs/{{tariff_for_information}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"manager",
+								"tariffs",
+								"{{tariff_for_information}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Info About Tariff SortBy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const params = [\"tariff_id\", \"tariff_name\", \"tariff_desc\", \"type_id\"];\r",
+									"const randomParam = params[Math.floor(Math.random() * params.length)];\r",
+									"\r",
+									"pm.collectionVariables.set(\"randomParam\", randomParam);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/manager/tariffs?sortBy={{randomParam}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"manager",
+								"tariffs"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "{{randomParam}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriber Endpoints",
+			"item": [
+				{
+					"name": "Top up balance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"msisdn\": \"{{msisdn}}\",\r\n  \"amount\": 100.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/subscriber/balance/top-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"subscriber",
+								"balance",
+								"top-up"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8083/",
+			"type": "string"
+		},
+		{
+			"key": "phoneNumber",
+			"value": ""
+		},
+		{
+			"key": "role",
+			"value": ""
+		},
+		{
+			"key": "authToken",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "randomNum",
+			"value": ""
+		},
+		{
+			"key": "randomMin",
+			"value": ""
+		},
+		{
+			"key": "paymentDay",
+			"value": ""
+		},
+		{
+			"key": "tariffid",
+			"value": ""
+		},
+		{
+			"key": "randomtariff",
+			"value": ""
+		},
+		{
+			"key": "tariff_for_information",
+			"value": ""
+		},
+		{
+			"key": "randomParam",
+			"value": ""
+		}
+	]
+}
