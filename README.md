@@ -1,5 +1,8 @@
 # TemporaryForAutotest 
 ## Ссылка на весь материал выполненный по проекту
+```bash
+https://disk.yandex.ru/d/WDGYCFGzLdtjTA
+```
 * Тест кейсы
 * Чек листы
 * Тест план
